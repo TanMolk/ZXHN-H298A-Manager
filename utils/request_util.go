@@ -6,12 +6,17 @@ import (
 )
 
 func ReadContent(response *http.Response) []byte {
-	defer response.Body.Close()
+	if response != nil && response.Body != nil {
 
-	all, err := io.ReadAll(response.Body)
-	if err != nil {
-		Error(err)
-		return nil
+		defer response.Body.Close()
+
+		all, err := io.ReadAll(response.Body)
+		if err != nil {
+			Error(err)
+			return nil
+		}
+		return all
+
 	}
-	return all
+	return nil
 }

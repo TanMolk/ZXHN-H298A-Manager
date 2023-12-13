@@ -39,6 +39,7 @@ func NewZteService(gateway string, username string, password string, client *htt
 }
 
 func (zte *ZteService) Login() error {
+	defer logutil.RecoverHandler()
 
 	logutil.Normal("Login Starting")
 
@@ -259,6 +260,8 @@ type UpdateIPV6FormResponse struct {
 }
 
 func (zte *ZteService) UpdateIPV6() bool {
+	defer logutil.RecoverHandler()
+
 	logutil.Normal("Start UpdateIPV6")
 
 	ipv6 := zte.getCurrentIPV6()
